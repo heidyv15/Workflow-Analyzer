@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: workflow-analyzer
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: RATE_LIMIT_PER_HOUR
+        value: "10"
+      - key: DAILY_ANALYSIS_LIMIT
+        value: "200"

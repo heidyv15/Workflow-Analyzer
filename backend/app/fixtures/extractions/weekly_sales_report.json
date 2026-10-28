@@ -1,0 +1,91 @@
+{
+  "is_analyzable": true,
+  "process_name": "Weekly sales report",
+  "trigger": "scheduled",
+  "frequency": "weekly",
+  "frequency_source": "stated",
+  "consistency": "standardized",
+  "data_access": "file_based",
+  "total_minutes": null,
+  "total_minutes_source": "unknown",
+  "steps": [
+    {
+      "id": "s1",
+      "label": "Download reports from three sales systems",
+      "future_label": "Automatic report retrieval",
+      "action_type": "retrieve_data",
+      "input_data": "structured",
+      "output_nature": "deterministic",
+      "requires_judgment": false,
+      "stakes": "none",
+      "external_facing": false,
+      "sensitivity": ["financial"],
+      "minutes": 15,
+      "minutes_source": "inferred",
+      "systems": ["Sales system A", "Sales system B", "Sales system C"]
+    },
+    {
+      "id": "s2",
+      "label": "Combine reports in Excel",
+      "future_label": "Merge and clean data",
+      "action_type": "transform_calculate",
+      "input_data": "structured",
+      "output_nature": "deterministic",
+      "requires_judgment": false,
+      "stakes": "none",
+      "external_facing": false,
+      "sensitivity": ["financial"],
+      "minutes": 15,
+      "minutes_source": "inferred",
+      "systems": ["Excel"]
+    },
+    {
+      "id": "s3",
+      "label": "Compare with last week's numbers",
+      "future_label": "Week-over-week variance calculation",
+      "action_type": "compare_analyze",
+      "input_data": "structured",
+      "output_nature": "deterministic",
+      "requires_judgment": false,
+      "stakes": "none",
+      "external_facing": false,
+      "sensitivity": ["financial"],
+      "minutes": 10,
+      "minutes_source": "inferred",
+      "systems": ["Excel"]
+    },
+    {
+      "id": "s4",
+      "label": "Write summary of major changes",
+      "future_label": "Draft summary of key changes",
+      "action_type": "generate_text",
+      "input_data": "structured",
+      "output_nature": "variable_language",
+      "requires_judgment": false,
+      "stakes": "low",
+      "external_facing": false,
+      "sensitivity": ["financial"],
+      "minutes": 15,
+      "minutes_source": "inferred",
+      "systems": []
+    },
+    {
+      "id": "s5",
+      "label": "Email report to management",
+      "future_label": "Send report to management",
+      "action_type": "communicate",
+      "input_data": "semi_structured",
+      "output_nature": "templated",
+      "requires_judgment": false,
+      "stakes": "low",
+      "external_facing": false,
+      "sensitivity": [],
+      "minutes": 5,
+      "minutes_source": "inferred",
+      "systems": ["Email"]
+    }
+  ],
+  "missing_information": [
+    {"field": "duration", "question": "Roughly how long does this take each Monday?"}
+  ]
+}

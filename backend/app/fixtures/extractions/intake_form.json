@@ -1,0 +1,61 @@
+{
+  "is_analyzable": true,
+  "process_name": "Form intake processing",
+  "trigger": "event",
+  "frequency": "unknown",
+  "frequency_source": "unknown",
+  "consistency": "standardized",
+  "data_access": "unknown",
+  "total_minutes": null,
+  "total_minutes_source": "unknown",
+  "steps": [
+    {
+      "id": "s1",
+      "label": "Copy form details into tracking spreadsheet",
+      "future_label": "Append submission to tracking sheet",
+      "action_type": "move_data",
+      "input_data": "semi_structured",
+      "output_nature": "deterministic",
+      "requires_judgment": false,
+      "stakes": "none",
+      "external_facing": false,
+      "sensitivity": ["pii"],
+      "minutes": 4,
+      "minutes_source": "inferred",
+      "systems": ["Intake form", "Spreadsheet"]
+    },
+    {
+      "id": "s2",
+      "label": "Create a folder named after the submitter",
+      "future_label": "Create folder from naming template",
+      "action_type": "file_management",
+      "input_data": "structured",
+      "output_nature": "deterministic",
+      "requires_judgment": false,
+      "stakes": "none",
+      "external_facing": false,
+      "sensitivity": ["pii"],
+      "minutes": 2,
+      "minutes_source": "inferred",
+      "systems": ["Shared drive"]
+    },
+    {
+      "id": "s3",
+      "label": "Send the standard confirmation email",
+      "future_label": "Send templated confirmation email",
+      "action_type": "communicate",
+      "input_data": "structured",
+      "output_nature": "templated",
+      "requires_judgment": false,
+      "stakes": "none",
+      "external_facing": true,
+      "sensitivity": ["pii"],
+      "minutes": 2,
+      "minutes_source": "inferred",
+      "systems": ["Email"]
+    }
+  ],
+  "missing_information": [
+    {"field": "volume", "question": "About how many intake forms do you receive per week?"}
+  ]
+}

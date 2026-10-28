@@ -1,0 +1,61 @@
+{
+  "is_analyzable": true,
+  "process_name": "Employee situation review",
+  "trigger": "ad_hoc",
+  "frequency": "ad_hoc",
+  "frequency_source": "inferred",
+  "consistency": "varies",
+  "data_access": "unknown",
+  "total_minutes": null,
+  "total_minutes_source": "unknown",
+  "steps": [
+    {
+      "id": "s1",
+      "label": "Gather details about the situation",
+      "future_label": "Structured incident intake",
+      "action_type": "retrieve_data",
+      "input_data": "unstructured",
+      "output_nature": "deterministic",
+      "requires_judgment": false,
+      "stakes": "low",
+      "external_facing": false,
+      "sensitivity": ["hr", "pii"],
+      "minutes": 20,
+      "minutes_source": "inferred",
+      "systems": ["Incident reports"]
+    },
+    {
+      "id": "s2",
+      "label": "Review the employee situation",
+      "future_label": "Review prepared case file",
+      "action_type": "compare_analyze",
+      "input_data": "unstructured",
+      "output_nature": "judgment",
+      "requires_judgment": true,
+      "stakes": "consequential",
+      "external_facing": false,
+      "sensitivity": ["hr", "pii"],
+      "minutes": 30,
+      "minutes_source": "inferred",
+      "systems": []
+    },
+    {
+      "id": "s3",
+      "label": "Decide whether disciplinary action is warranted",
+      "future_label": "Disciplinary decision",
+      "action_type": "decide_approve",
+      "input_data": "unstructured",
+      "output_nature": "judgment",
+      "requires_judgment": true,
+      "stakes": "consequential",
+      "external_facing": false,
+      "sensitivity": ["hr", "pii"],
+      "minutes": 15,
+      "minutes_source": "inferred",
+      "systems": []
+    }
+  ],
+  "missing_information": [
+    {"field": "frequency", "question": "Roughly how many of these situations come up per month?"}
+  ]
+}
